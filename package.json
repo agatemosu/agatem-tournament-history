@@ -1,0 +1,25 @@
+{
+	"name": "agatem-tournament-history",
+	"version": "0.0.1",
+	"type": "module",
+	"imports": {
+		"#/*": "./src/*"
+	},
+	"scripts": {
+		"astro": "astro",
+		"build": "astro build",
+		"dev": "astro dev",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "4.3.3",
+		"astro": "7.4.2",
+		"tailwindcss": "4.3.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.6.2"
+	},
+	"engines": {
+		"node": ">=26"
+	}
+}

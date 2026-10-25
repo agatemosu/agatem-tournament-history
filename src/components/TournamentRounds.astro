@@ -1,0 +1,43 @@
+---
+import type { Tourney } from "#/data/types.ts";
+
+interface Props {
+	rounds: Tourney["rounds"];
+}
+
+const { rounds } = Astro.props;
+---
+
+<div class="flex flex-col gap-1">
+	{rounds.map((round) => (
+		<div class="flex items-center gap-3">
+			<span class="w-20 text-sm font-medium text-neutral-400">
+				{round.name}
+			</span>
+
+			<div class="flex flex-wrap items-center gap-2">
+				{round.mps?.map((mp) => (
+					<a
+						href={mp}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-xs font-medium text-rose-400 transition-colors hover:text-rose-200"
+					>
+						MP
+					</a>
+				))}
+
+				{round.stats && (
+					<a
+						href={round.stats}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-xs font-medium text-amber-400 transition-colors hover:text-amber-200"
+					>
+						Stats
+					</a>
+				)}
+			</div>
+		</div>
+	))}
+</div>

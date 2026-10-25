@@ -1,0 +1,81 @@
+---
+import type { Tourney } from "#/data/types.ts";
+import TournamentLinks from "./TournamentLinks.astro";
+import TournamentRounds from "./TournamentRounds.astro";
+import TournamentTeam from "./TournamentTeam.astro";
+
+interface Props {
+	tournament: Tourney;
+	index: number;
+}
+
+const { tournament: t, index } = Astro.props;
+
+const isTeam = t.teamsOf !== "solo";
+
+const colors = [
+	"text-red-400",
+	"text-orange-400",
+	"text-amber-400",
+	"text-yellow-400",
+	"text-lime-400",
+	"text-green-400",
+	"text-emerald-400",
+	"text-teal-400",
+	"text-cyan-400",
+	"text-sky-400",
+	"text-blue-400",
+	"text-indigo-400",
+	"text-violet-400",
+	"text-purple-400",
+	"text-fuchsia-400",
+	"text-pink-400",
+	"text-rose-400",
+];
+
+const yearColor = colors[t.year % colors.length];
+---
+
+<tr class="transition-colors hover:bg-neutral-800/50">
+	<td class="px-3 py-3 text-center align-top">
+		<div class="flex flex-col gap-1">
+			<span class="text-lg text-neutral-100">#{index + 1}</span>
+			<span class={`text-sm font-bold ${yearColor}`}>{t.year}</span>
+		</div>
+	</td>
+
+	<td class="w-80 px-3 py-3 align-top">
+		<div class="flex flex-col gap-1">
+			<span class="font-medium text-neutral-100">{t.name}</span>
+			<TournamentLinks links={t.links} />
+		</div>
+	</td>
+
+	<td class="px-3 py-3 align-top text-neutral-100">
+		{t.range}
+	</td>
+
+	<td class="px-3 py-3 align-top">
+		<div class="flex flex-col gap-1">
+			<span class="text-neutral-100">{t.format}</span>
+			<span class="text-sm text-neutral-400">
+				{isTeam ? `Teams of ${t.teamsOf}` : "Solo"}
+			</span>
+		</div>
+	</td>
+
+	<td class="w-96 px-3 py-3 align-top">
+		<TournamentTeam tournament={t} />
+	</td>
+
+	<td class="px-3 py-3 align-top">
+		<div class="flex flex-col gap-1">
+			<span class="text-sm text-neutral-400">Seed {t.result.seed}</span>
+			<span class="font-medium text-neutral-100">{t.result.stageFinished}</span>
+		</div>
+	</td>
+
+	<td class="px-3 py-3 align-top">
+		<TournamentRounds rounds={t.rounds} />
+	</td>
+</tr>

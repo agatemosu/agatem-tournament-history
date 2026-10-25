@@ -1,0 +1,34 @@
+---
+import type { Tourney } from "#/data/types.ts";
+import TournamentRow from "./TournamentRow.astro";
+
+interface Props {
+	tourneys: Tourney[];
+}
+
+const { tourneys } = Astro.props;
+---
+
+<table
+	class="w-full min-w-max border-collapse border border-neutral-800 bg-neutral-900 text-left"
+>
+	<thead
+		class="bg-neutral-800 text-sm tracking-wide text-neutral-400 uppercase"
+	>
+		<tr>
+			<th class="px-3 py-3 text-center font-semibold">Date</th>
+			<th class="px-3 py-3 font-semibold">Tournament</th>
+			<th class="px-3 py-3 font-semibold">Range</th>
+			<th class="px-3 py-3 font-semibold">Format</th>
+			<th class="px-3 py-3 font-semibold">Team</th>
+			<th class="px-3 py-3 font-semibold">Placement</th>
+			<th class="px-3 py-3 font-semibold">Rounds</th>
+		</tr>
+	</thead>
+
+	<tbody class="divide-y divide-neutral-800">
+		{tourneys.map((tournament, index) => (
+			<TournamentRow tournament={tournament} index={index} />
+		))}
+	</tbody>
+</table>

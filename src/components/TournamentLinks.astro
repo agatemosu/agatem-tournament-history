@@ -1,0 +1,33 @@
+---
+import type { Tourney } from "#/data/types.ts";
+
+interface Props {
+	links: Tourney["links"];
+}
+
+const { links } = Astro.props;
+---
+
+<div class="flex gap-2">
+	{links.forum && (
+		<a
+			href={links.forum}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="rounded-md border border-neutral-700 px-2 py-1 text-sm font-medium text-pink-400 transition hover:border-pink-500 hover:bg-pink-500/10 hover:text-pink-300"
+		>
+			Forum ↗
+		</a>
+	)}
+
+	{links.sheet && (
+		<a
+			href={links.sheet}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="rounded-md border border-neutral-700 px-2 py-1 text-sm font-medium text-emerald-400 transition hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-300"
+		>
+			Sheet ↗
+		</a>
+	)}
+</div>

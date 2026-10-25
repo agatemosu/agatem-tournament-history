@@ -1,0 +1,40 @@
+---
+import type { Tourney } from "#/data/types.ts";
+
+interface Props {
+	tournament: Tourney;
+}
+
+const { tournament: t } = Astro.props;
+
+const isTeam = t.teamsOf !== "solo";
+---
+
+{isTeam ? (
+	<div class="flex flex-col gap-1">
+		<span class="font-semibold text-neutral-100">{t.teamName}</span>
+
+		<div class="flex flex-wrap gap-x-3 gap-y-1">
+			{t.team.map((player) => (
+				<a
+					href={`https://osu.ppy.sh/users/${player.id}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1 text-neutral-400 transition-colors hover:text-pink-400"
+				>
+					<img
+						src={`https://assets.ppy.sh/old-flags/${player.country}.png`}
+						alt=""
+						width="70"
+						height="47"
+						class="w-6"
+						loading="lazy"
+					/>
+					{player.username}
+				</a>
+			))}
+		</div>
+	</div>
+) : (
+	<span class="text-neutral-500">—</span>
+)}
